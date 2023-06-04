@@ -16,10 +16,12 @@ import java.util.List;
 public class AppointmentRequest {
 
 //    @NotNull(message = "Employee's id cannot be null")
-//    private Integer employeeId;
+    private Integer employeeId;
 
  //   @NotNull(message = "Patient's id cannot be null")
     private Integer patientId;
+
+    private Integer doctorId;
 
  //   @NotNull(message = "Start time cannot be null")
     private LocalDateTime startTime;

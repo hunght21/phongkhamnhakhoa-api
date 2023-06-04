@@ -1,19 +1,14 @@
 package com.hust.nhakhoa.Controller;
 
 import com.hust.nhakhoa.DTO.PrescriptionDTO;
-import com.hust.nhakhoa.Model.Gender;
-import com.hust.nhakhoa.Model.Medicine;
-import com.hust.nhakhoa.Model.Patient;
 import com.hust.nhakhoa.Model.Prescription;
-import com.hust.nhakhoa.Request.MedicineRequest;
-import com.hust.nhakhoa.Request.PatientRequest;
 import com.hust.nhakhoa.Request.PrescriptionRequest;
 import com.hust.nhakhoa.Service.PrescriptionService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,6 +20,7 @@ public class PrescriptionController {
     @Autowired
     private PrescriptionService prescriptionService;
 
+    @PreAuthorize("hasAnyRole('ADMIN', 'RECEPTIONIST', 'EMPLOYEE')")
     @GetMapping("/all")
     ResponseEntity<?> getAllPrescription(){
         ResponseEntity<?> resp;
@@ -41,6 +37,7 @@ public class PrescriptionController {
         return resp;
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN', 'RECEPTIONIST', 'EMPLOYEE')")
     @GetMapping("/one/{id}")
     ResponseEntity<?> getPrescriptionById(@PathVariable("id") Integer prescriptionId){
         ResponseEntity<?> resp;
@@ -57,6 +54,7 @@ public class PrescriptionController {
         return resp;
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN', 'RECEPTIONIST', 'EMPLOYEE')")
     @PostMapping("/add")
     public ResponseEntity<?> addPrescription(@Valid @RequestBody PrescriptionRequest prescriptionRequest){
 
@@ -73,6 +71,7 @@ public class PrescriptionController {
         return resp;
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN', 'RECEPTIONIST', 'EMPLOYEE')")
     @PostMapping("/update/{id}")
     public ResponseEntity<?> updatePrescription(@PathVariable("id") Integer prescriptionID,
                                                 @Valid @RequestBody PrescriptionRequest prescriptionRequest){
@@ -88,7 +87,7 @@ public class PrescriptionController {
         return resp;
     }
 
-
+    @PreAuthorize("hasAnyRole('ADMIN', 'RECEPTIONIST', 'EMPLOYEE')")
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> deletePrescription(@PathVariable("id") Integer prescriptionID){
         ResponseEntity<?> resp=null;
@@ -103,6 +102,7 @@ public class PrescriptionController {
 
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN', 'RECEPTIONIST', 'EMPLOYEE')")
     @PostMapping("/{prescriptionId}/medicine/{medicineId}")
     public ResponseEntity<?> addMedicineByPrescription(@PathVariable ("prescriptionId") Integer prescriptionId,
                                                        @PathVariable ("medicineId") Integer medicineId) {

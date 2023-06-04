@@ -3,10 +3,8 @@ package com.hust.nhakhoa.Service.Impl;
 import com.hust.nhakhoa.DTO.AppointmentDTO;
 import com.hust.nhakhoa.DTO.PrescriptionDTO;
 import com.hust.nhakhoa.Exceptions.ResourceNotFoundException;
-import com.hust.nhakhoa.Model.Appointment;
-import com.hust.nhakhoa.Model.Medicine;
-import com.hust.nhakhoa.Model.Patient;
-import com.hust.nhakhoa.Model.Prescription;
+import com.hust.nhakhoa.Model.*;
+import com.hust.nhakhoa.Repository.DoctorRepository;
 import com.hust.nhakhoa.Repository.MedicineRepository;
 import com.hust.nhakhoa.Repository.PatientRepository;
 import com.hust.nhakhoa.Repository.PrescriptionRepository;
@@ -35,6 +33,9 @@ public class PrescriptionServiceImpl implements PrescriptionService {
 
     @Autowired
     private MedicineService medicineService;
+
+    @Autowired
+    private DoctorRepository doctorRepository;
 
     @Autowired
     private ModelMapper modelMapper;
@@ -77,7 +78,7 @@ public class PrescriptionServiceImpl implements PrescriptionService {
         Prescription prescription = getPrescriptionOrThrow(prescriptionId);
         Medicine medicine = getMedicineOrThrow(medicineId);
         prescription.getMedicineList().add(medicine);
-        medicine.getList().add(prescription);
+      //  medicine.getList().add(prescription);
         prescription.setFinalPrice(medicineService.calculateTotalPrice(prescription.getMedicineList()));
         prescriptonRepository.save(prescription);
         return modelMapper.map(prescription,PrescriptionDTO.class);
@@ -127,7 +128,10 @@ public class PrescriptionServiceImpl implements PrescriptionService {
         Patient patient = patientRepository.findById(prescriptionRequest.getPatientId())
                 .orElseThrow(() ->new ResourceNotFoundException("Patient", "patient id", prescriptionRequest.getPatientId()));
 
+        Doctor doctor = doctorRepository.findById(prescriptionRequest.getDoctorId())
+                .orElseThrow(() ->new ResourceNotFoundException("Doctor", "patient id", prescriptionRequest.getPatientId()));
         prescription.setPatient(patient);
+        prescription.setDoctor(doctor);
         prescription.setName(prescriptionRequest.getName());
         prescription.setNote(prescriptionRequest.getNote());
         prescription.setMedicineList(medicineList);

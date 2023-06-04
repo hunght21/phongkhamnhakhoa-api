@@ -51,11 +51,6 @@ public class Users implements UserDetails {
         return roleList.contains(role);
     }
 
-//    public Users(String name, String password, String email) {
-//        this.name = name;
-//        this.password = password;
-//        this.email = email;
-//    }
 
     public Users(String name, String password, String email, List<Role> roleList) {
         this.name = name;
@@ -69,14 +64,14 @@ public class Users implements UserDetails {
 
         ArrayList<SimpleGrantedAuthority> authorities = new ArrayList<>();
         for (Role role : roleList) {
-            authorities.add(new SimpleGrantedAuthority("Role" + role.name()));
+            authorities.add(new SimpleGrantedAuthority("ROLE_" + role.name()));
         }
         return authorities;
     }
 
     @Override
     public String getPassword() {
-        return null;
+        return password;
     }
 
     @Override

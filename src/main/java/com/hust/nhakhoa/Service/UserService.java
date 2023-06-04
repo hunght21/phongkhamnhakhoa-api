@@ -10,5 +10,5 @@ public interface UserService {
     public UserDTO updateUser(Integer userId,UserRequest userRequest);
     public void deleteUser(Integer userId);
     public UserDTO getUserById(Integer userId);
-    public void checkEmailUniqueness(String email);
+
 }

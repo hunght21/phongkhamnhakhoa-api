@@ -4,7 +4,6 @@ package com.hust.nhakhoa.Config;
 import com.hust.nhakhoa.Repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -22,7 +21,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class AppConfig {
 
     private final UserRepository userRepository;
-
 
     @Bean
     public UserDetailsService userDetailsService() throws UsernameNotFoundException {
@@ -53,8 +51,5 @@ public class AppConfig {
     public ModelMapper modelMapper(){
         return new ModelMapper();
     }
-
-
-
 
 }

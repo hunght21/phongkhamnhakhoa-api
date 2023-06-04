@@ -33,6 +33,7 @@ public class Prescription {
     @NotNull
     private String name;
 
+
     @Column(name = "prescription_price")
     private Double finalPrice;
 
@@ -46,6 +47,10 @@ public class Prescription {
     }
 
     @ManyToOne
+    @JoinColumn(name = "doctor_id")
+    private Doctor doctor;
+
+    @ManyToOne
  //   @JsonBackReference
     @JoinColumn(name = "patient_id")
     private Patient patient;
@@ -56,20 +61,6 @@ public class Prescription {
             joinColumns = @JoinColumn(name = "prescription_id"),
             inverseJoinColumns = @JoinColumn(name = "medicine_id")
     )
-//    @NotEmpty(message = "List of services must have at least one service")
     private List<Medicine> medicineList;
-
-//    public void addMedicine(Medicine medicine) {
-//        this.medicineList.add(medicine);
-//        medicine.getList().add(this);
-//    }
-//
-//    public void removeMedicine(int medicineId) {
-//        Medicine medicine = this.medicineList.stream().filter(t -> t.getId() == medicineId).findFirst().orElse(null);
-//        if (medicine != null) {
-//            this.medicineList.remove(medicineList);
-//            medicine.getList().remove(this);
-//        }
-//    }
 
 }

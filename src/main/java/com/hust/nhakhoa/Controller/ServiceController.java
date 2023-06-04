@@ -1,8 +1,6 @@
 package com.hust.nhakhoa.Controller;
 
 
-import com.hust.nhakhoa.Exceptions.ResourceNotFoundException;
-import com.hust.nhakhoa.Model.Appointment;
 import com.hust.nhakhoa.Model.Service;
 import com.hust.nhakhoa.Request.ServiceRequet;
 import com.hust.nhakhoa.Service.ServiceService;
@@ -10,9 +8,9 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -22,6 +20,7 @@ public class ServiceController {
     @Autowired
     private ServiceService serviceService;
 
+    @PreAuthorize("hasAnyRole('ADMIN', 'RECEPTIONIST', 'EMPLOYEE')")
     @GetMapping("/all")
     public ResponseEntity<?> getAllService(){
         ResponseEntity<?> resp;
@@ -39,6 +38,7 @@ public class ServiceController {
         return resp;
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN', 'RECEPTIONIST', 'EMPLOYEE')")
     @GetMapping("/one/{id}")
     public ResponseEntity<?> getServiceById(@PathVariable("id") Integer serviceId) {
         ResponseEntity<?> resp;
@@ -56,6 +56,7 @@ public class ServiceController {
         return resp;
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN', 'RECEPTIONIST', 'EMPLOYEE')")
     @PostMapping("/add")
     ResponseEntity<?> addService(@Valid @RequestBody ServiceRequet serviceRequet){
         ResponseEntity<?> resp;
@@ -69,6 +70,7 @@ public class ServiceController {
         return resp;
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN', 'RECEPTIONIST', 'EMPLOYEE')")
     @PostMapping("/update/{id}")
     public ResponseEntity<?> updateService(@PathVariable("id") Integer serviceId,@Valid @RequestBody ServiceRequet serviceRequet){
 
@@ -83,6 +85,7 @@ public class ServiceController {
         return resp;
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN', 'RECEPTIONIST', 'EMPLOYEE')")
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> deleteService(@PathVariable("id") Integer serviceId){
         ResponseEntity<?> resp=null;

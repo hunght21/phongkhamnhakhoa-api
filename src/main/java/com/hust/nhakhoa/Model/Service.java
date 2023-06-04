@@ -34,7 +34,7 @@ public class Service {
     @Digits(integer = 6, fraction = 2)
     private Double price;
 
-    @ManyToMany(mappedBy = "services")
+    @ManyToMany(mappedBy = "services", fetch = FetchType.EAGER)
     private List<Appointment> appointmentList;
 
     public Service(String name, Integer time, Double price) {

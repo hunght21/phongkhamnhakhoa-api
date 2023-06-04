@@ -1,15 +1,13 @@
 package com.hust.nhakhoa.DTO;
 
+import com.hust.nhakhoa.Model.Doctor;
 import com.hust.nhakhoa.Model.Medicine;
 import com.hust.nhakhoa.Model.Patient;
-import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -22,5 +20,6 @@ public class PrescriptionDTO implements Serializable {
     private Double finalPrice;
     private String note;
     private Patient patient;
+    private Doctor doctor;
     private List<Medicine> medicineId;
 }

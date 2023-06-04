@@ -3,9 +3,7 @@ package com.hust.nhakhoa.Service.Impl;
 import com.hust.nhakhoa.DTO.AppointmentDTO;
 import com.hust.nhakhoa.Exceptions.ResourceNotFoundException;
 import com.hust.nhakhoa.Model.*;
-import com.hust.nhakhoa.Repository.AppointmentRepository;
-import com.hust.nhakhoa.Repository.PatientRepository;
-import com.hust.nhakhoa.Repository.ServiceRepository;
+import com.hust.nhakhoa.Repository.*;
 import com.hust.nhakhoa.Request.AppointmentRequest;
 import com.hust.nhakhoa.Service.AppointmentService;
 import org.modelmapper.ModelMapper;
@@ -24,7 +22,11 @@ public class AppointmentImpl implements AppointmentService {
     @Autowired
     private ServiceRepository serviceRepository;
     @Autowired
+    private UserRepository userRepository;
+    @Autowired
     private PatientRepository patientRepository;
+    @Autowired
+    private DoctorRepository doctorRepository;
     @Autowired
     private ModelMapper modelMapper;
 
@@ -90,14 +92,17 @@ public class AppointmentImpl implements AppointmentService {
                     .orElseThrow(() -> new ResourceNotFoundException("Service", "service id", id));
             services.add(service);
         }
-//
-//        Users employee = userRepository.findById(appointmentRequest.getEmployeeId())
-//                .orElseThrow(() ->new ResourceNotFoundException("Employee", "employee id", appointmentRequest.getEmployeeId()));;
+
+        Users employee = userRepository.findById(appointmentRequest.getEmployeeId())
+                .orElseThrow(() ->new ResourceNotFoundException("Employee", "employee id", appointmentRequest.getEmployeeId()));;
         Patient patient = patientRepository.findById(appointmentRequest.getPatientId())
                 .orElseThrow(() ->new ResourceNotFoundException("Patient", "patient id", appointmentRequest.getPatientId()));
+        Doctor doctor = doctorRepository.findById(appointmentRequest.getDoctorId())
+                .orElseThrow(() ->new ResourceNotFoundException("Doctor", "patient id", appointmentRequest.getPatientId()));
 //        if(employee.hasRole(Role.EMPLOYEE)) {
             appointment.setServices(services);
-//            appointment.setEmployee(employee);
+ //           appointment.setEmployee(employee);
+            appointment.setDoctor(doctor);
             appointment.setPatient(patient);
             appointment.setStartTime(appointmentRequest.getStartTime());
             appointment.setEndTime(appointmentRequest.getEndTime());

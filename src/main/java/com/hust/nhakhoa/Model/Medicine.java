@@ -5,15 +5,12 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.DecimalMin;
-import jakarta.validation.constraints.Digits;
+
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -41,9 +38,9 @@ public class Medicine {
     @JsonIgnore
     private List<Prescription> list;
 
-    @Column(columnDefinition = "DECIMAL(8, 2)")
-    @DecimalMin(value = "0.0", inclusive = false)
-    @Digits(integer = 6, fraction = 2)
+//    @Column(columnDefinition = "DECIMAL(8, 2)")
+//    @DecimalMin(value = "0.0", inclusive = false)
+//    @Digits(integer = 6, fraction = 2)
     private double price;
 
     public double getPrice() {
@@ -55,11 +52,4 @@ public class Medicine {
     }
 
 
-    public List<Prescription> getList() {
-        return list;
-    }
-
-    public void setList(List<Prescription> list) {
-        this.list = list;
-    }
 }

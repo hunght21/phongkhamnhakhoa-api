@@ -1,17 +1,14 @@
 package com.hust.nhakhoa.Controller;
 
-import com.hust.nhakhoa.Model.Gender;
 import com.hust.nhakhoa.Model.Medicine;
-import com.hust.nhakhoa.Model.Patient;
-import com.hust.nhakhoa.Model.Prescription;
 import com.hust.nhakhoa.Request.MedicineRequest;
-import com.hust.nhakhoa.Request.PatientRequest;
 import com.hust.nhakhoa.Service.MedicineService;
 import com.hust.nhakhoa.Service.PrescriptionService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -26,6 +23,7 @@ public class MedicineController {
     @Autowired
     private PrescriptionService prescriptionService;
 
+//    @PreAuthorize("hasAnyRole('ADMIN', 'RECEPTIONIST', 'EMPLOYEE')")
     @GetMapping("/medicine/all")
     ResponseEntity<?> getAllMedicine() {
         ResponseEntity<?> resp;
@@ -42,7 +40,7 @@ public class MedicineController {
         return resp;
     }
 
-
+//    @PreAuthorize("hasAnyRole('ADMIN', 'RECEPTIONIST', 'EMPLOYEE')")
     @GetMapping("/medicine/one/{id}")
     ResponseEntity<?> getMedicineById(@PathVariable ("id") Integer medicineID) {
         ResponseEntity<?> resp;
@@ -59,6 +57,7 @@ public class MedicineController {
         return resp;
     }
 
+//    @PreAuthorize("hasAnyRole('ADMIN', 'RECEPTIONIST', 'EMPLOYEE')")
     @PostMapping("/medicine/add")
     ResponseEntity<?> addMedicine(@Valid @RequestBody MedicineRequest medicineRequest){
         ResponseEntity<?> resp;
@@ -72,6 +71,7 @@ public class MedicineController {
         return resp;
     }
 
+//    @PreAuthorize("hasAnyRole('ADMIN', 'RECEPTIONIST', 'EMPLOYEE')")
     @PostMapping("/medicine/update/{id}")
     public ResponseEntity<?> updateMedicine(@PathVariable("id") Integer medicineID,@Valid @RequestBody MedicineRequest medicineRequest){
 
@@ -91,6 +91,7 @@ public class MedicineController {
         return resp;
     }
 
+//    @PreAuthorize("hasAnyRole('ADMIN', 'RECEPTIONIST', 'EMPLOYEE')")
     @DeleteMapping("/medicine/delete/{id}")
     public ResponseEntity<?> deletePatient(@PathVariable("id") Integer medicineId){
         ResponseEntity<?> resp=null;
@@ -105,27 +106,5 @@ public class MedicineController {
 
     }
 
-
-//    @PostMapping("/{prescriptionId}/medicine")
-//    public ResponseEntity<Medicine> addMedicineByPrescription(@PathVariable("prescriptionId") Integer prescriptionID, @RequestBody MedicineRequest medicineRequest) {
-//        Medicine medicine = prescriptionService.getPrescriptionById(prescriptionID).map(tutorial -> {
-//            long tagId = tagRequest.getId();
-//
-//            // tag is existed
-//            if (tagId != 0L) {
-//                Tag _tag = tagRepository.findById(tagId)
-//                        .orElseThrow(() -> new ResourceNotFoundException("Not found Tag with id = " + tagId));
-//                tutorial.addTag(_tag);
-//                tutorialRepository.save(tutorial);
-//                return _tag;
-//            }
-//
-//            // add and create new Tag
-//            tutorial.addTag(tagRequest);
-//            return tagRepository.save(tagRequest);
-//        }).orElseThrow(() -> new ResourceNotFoundException("Not found Tutorial with id = " + tutorialId));
-//
-//        return new ResponseEntity<>(tag, HttpStatus.CREATED);
-//    }
 
 }

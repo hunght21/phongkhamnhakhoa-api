@@ -23,6 +23,7 @@ public class PrescriptionRequest {
     private Double finalPrice;
     private String note;
     private Integer patientId;
+    private Integer doctorId;
     private List<Integer> medicineId;
 
 }

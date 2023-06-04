@@ -2,11 +2,8 @@ package com.hust.nhakhoa.Service.Impl;
 
 import com.hust.nhakhoa.Exceptions.ResourceNotFoundException;
 import com.hust.nhakhoa.Model.Medicine;
-import com.hust.nhakhoa.Model.Patient;
-import com.hust.nhakhoa.Model.Prescription;
 import com.hust.nhakhoa.Repository.MedicineRepository;
 import com.hust.nhakhoa.Request.MedicineRequest;
-import com.hust.nhakhoa.Request.PrescriptionRequest;
 import com.hust.nhakhoa.Service.MedicineService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;

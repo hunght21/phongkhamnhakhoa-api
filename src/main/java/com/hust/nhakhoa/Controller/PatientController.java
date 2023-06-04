@@ -8,9 +8,9 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -19,7 +19,7 @@ public class PatientController {
 
     @Autowired
     private PatientService patientService;
-
+    @PreAuthorize("hasAnyRole('ADMIN', 'RECEPTIONIST', 'EMPLOYEE')")
     @GetMapping("/all")
     public ResponseEntity<?> getAllPatient(){
         ResponseEntity<?> resp;
@@ -36,6 +36,7 @@ public class PatientController {
         return resp;
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN', 'RECEPTIONIST', 'EMPLOYEE')")
     @GetMapping("/one/{id}")
     public ResponseEntity<?> getPatientById(@PathVariable("id") Integer id){
         ResponseEntity<?> resp;
@@ -52,6 +53,7 @@ public class PatientController {
         return resp;
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN', 'RECEPTIONIST', 'EMPLOYEE')")
     @PostMapping("/add")
     public ResponseEntity<?> addPatient(@Valid @RequestBody PatientRequest patientRequest){
 
@@ -67,18 +69,19 @@ public class PatientController {
         return resp;
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN', 'RECEPTIONIST', 'EMPLOYEE')")
     @PostMapping("/update/{id}")
     public ResponseEntity<?> updatePatient(@PathVariable("id") Integer patientID,@Valid @RequestBody PatientRequest patientRequest){
 
         ResponseEntity<?> resp;
-        Patient existingEmployee = patientService.getPatientById(patientID);
-        existingEmployee.setId(patientID);
-        existingEmployee.setName(patientRequest.getName());
-        existingEmployee.setEmail(patientRequest.getEmail());
-        existingEmployee.setAddress(patientRequest.getAddress());
-        existingEmployee.setPhoneNumber(patientRequest.getPhoneNumber());
-        existingEmployee.setDateOfBirth(patientRequest.getDateOfBirth());
-        existingEmployee.setGender(Gender.valueOf(patientRequest.getGender()));
+        Patient existingPatient = patientService.getPatientById(patientID);
+        existingPatient.setId(patientID);
+        existingPatient.setName(patientRequest.getName());
+        existingPatient.setEmail(patientRequest.getEmail());
+        existingPatient.setAddress(patientRequest.getAddress());
+        existingPatient.setPhoneNumber(patientRequest.getPhoneNumber());
+        existingPatient.setDateOfBirth(patientRequest.getDateOfBirth());
+        existingPatient.setGender(Gender.valueOf(patientRequest.getGender()));
         patientService.updatePatient(patientID,patientRequest);
         try {
             resp =  new ResponseEntity<String>("PatientId registered with "+ patientRequest.getId(),HttpStatus.CREATED);
@@ -89,7 +92,7 @@ public class PatientController {
         return resp;
     }
 
-
+    @PreAuthorize("hasAnyRole('ADMIN', 'RECEPTIONIST', 'EMPLOYEE')")
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> deletePatient(@PathVariable("id") Integer patientId){
         ResponseEntity<?> resp=null;

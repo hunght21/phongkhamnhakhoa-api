@@ -1,5 +1,6 @@
 package com.hust.nhakhoa.DTO;
 
+import com.hust.nhakhoa.Model.Doctor;
 import com.hust.nhakhoa.Model.Patient;
 import com.hust.nhakhoa.Model.Service;
 import com.hust.nhakhoa.Model.Status;
@@ -19,6 +20,7 @@ public class AppointmentDTO implements Serializable {
     private int id;
     private UserDTO user;
     private Patient patient;
+    private Doctor doctor;
     private LocalDateTime startTime;
     private LocalDateTime endTime;
     private String notes;
