@@ -4,10 +4,8 @@ import com.hust.nhakhoa.Exceptions.ResourceNotFoundException;
 import com.hust.nhakhoa.Model.*;
 import com.hust.nhakhoa.Repository.AppointmentRepository;
 import com.hust.nhakhoa.Repository.ServiceRepository;
-import com.hust.nhakhoa.Request.AppointmentRequest;
-import com.hust.nhakhoa.Request.ServiceRequet;
+import com.hust.nhakhoa.Request.ServiceRequest;
 import com.hust.nhakhoa.Service.ServiceService;
-import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,7 +36,7 @@ public class ServiceServiceImpl implements ServiceService {
     }
 
     @Override
-    public com.hust.nhakhoa.Model.Service addService(ServiceRequet serviceRequet) {
+    public com.hust.nhakhoa.Model.Service addService(ServiceRequest serviceRequet) {
         com.hust.nhakhoa.Model.Service service = modelMapper.map(serviceRequet,com.hust.nhakhoa.Model.Service.class);
         return serviceRepository.save(service);
 //        com.hust.nhakhoa.Model.Service service = new com.hust.nhakhoa.Model.Service();
@@ -59,7 +57,7 @@ public class ServiceServiceImpl implements ServiceService {
     }
 
     @Override
-    public com.hust.nhakhoa.Model.Service updateService(Integer serviceId, ServiceRequet serviceRequet) {
+    public com.hust.nhakhoa.Model.Service updateService(Integer serviceId, ServiceRequest serviceRequet) {
         com.hust.nhakhoa.Model.Service service = getServiceOrThrow(serviceId);
         saveDataToService(service,serviceRequet);
         modelMapper.map(serviceRequet,service);
@@ -73,7 +71,7 @@ public class ServiceServiceImpl implements ServiceService {
 
     }
 
-    private void saveDataToService(com.hust.nhakhoa.Model.Service service, ServiceRequet serviceRequet) {
+    private void saveDataToService(com.hust.nhakhoa.Model.Service service, ServiceRequest serviceRequet) {
         List<Appointment> appointmentList = new ArrayList<>();
 
         for(Integer id : serviceRequet.getAppointmentList()) {
@@ -82,7 +80,6 @@ public class ServiceServiceImpl implements ServiceService {
             appointmentList.add(appointment);
         }
         service.setName(serviceRequet.getName());
-        service.setTime(serviceRequet.getTime());
         service.setPrice(serviceRequet.getPrice());
         service.setDetail(serviceRequet.getDetail());
         service.setAppointmentList(appointmentList);

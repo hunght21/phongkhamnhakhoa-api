@@ -1,6 +1,7 @@
 package com.hust.nhakhoa.Controller;
 
 import com.hust.nhakhoa.Request.AuthenticationRequest;
+import com.hust.nhakhoa.Request.RegisterPatientRequest;
 import com.hust.nhakhoa.Request.RegisterRequest;
 import com.hust.nhakhoa.Response.JwtAuthResponse;
 import com.hust.nhakhoa.Service.AuthenticationService;
@@ -28,6 +29,11 @@ public class AuthenticationController {
         return ResponseEntity.ok(authenticationService.register(registerRequest));
     }
 
+    @PostMapping("/registerpatient")
+    public ResponseEntity<JwtAuthResponse> registerPatient(
+            @Valid @RequestBody RegisterPatientRequest registerPatientRequest) {
+        return ResponseEntity.ok(authenticationService.registerPatient(registerPatientRequest));
+    }
     @PostMapping("/authenticate")
     public ResponseEntity<JwtAuthResponse> authenticate(
             @Valid @RequestBody AuthenticationRequest authenticationRequest

@@ -2,7 +2,7 @@ package com.hust.nhakhoa.Controller;
 
 
 import com.hust.nhakhoa.Model.Service;
-import com.hust.nhakhoa.Request.ServiceRequet;
+import com.hust.nhakhoa.Request.ServiceRequest;
 import com.hust.nhakhoa.Service.ServiceService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +20,7 @@ public class ServiceController {
     @Autowired
     private ServiceService serviceService;
 
-    @PreAuthorize("hasAnyRole('ADMIN', 'RECEPTIONIST', 'EMPLOYEE')")
+//    @PreAuthorize("hasAnyRole('ADMIN', 'RECEPTIONIST', 'EMPLOYEE')")
     @GetMapping("/all")
     public ResponseEntity<?> getAllService(){
         ResponseEntity<?> resp;
@@ -38,7 +38,7 @@ public class ServiceController {
         return resp;
     }
 
-    @PreAuthorize("hasAnyRole('ADMIN', 'RECEPTIONIST', 'EMPLOYEE')")
+//    @PreAuthorize("hasAnyRole('ADMIN', 'RECEPTIONIST', 'EMPLOYEE')")
     @GetMapping("/one/{id}")
     public ResponseEntity<?> getServiceById(@PathVariable("id") Integer serviceId) {
         ResponseEntity<?> resp;
@@ -56,9 +56,9 @@ public class ServiceController {
         return resp;
     }
 
-    @PreAuthorize("hasAnyRole('ADMIN', 'RECEPTIONIST', 'EMPLOYEE')")
+//    @PreAuthorize("hasAnyRole('ADMIN', 'RECEPTIONIST', 'EMPLOYEE')")
     @PostMapping("/add")
-    ResponseEntity<?> addService(@Valid @RequestBody ServiceRequet serviceRequet){
+    ResponseEntity<?> addService(@Valid @RequestBody ServiceRequest serviceRequet){
         ResponseEntity<?> resp;
         Service service = serviceService.addService(serviceRequet);
 
@@ -72,7 +72,7 @@ public class ServiceController {
 
     @PreAuthorize("hasAnyRole('ADMIN', 'RECEPTIONIST', 'EMPLOYEE')")
     @PostMapping("/update/{id}")
-    public ResponseEntity<?> updateService(@PathVariable("id") Integer serviceId,@Valid @RequestBody ServiceRequet serviceRequet){
+    public ResponseEntity<?> updateService(@PathVariable("id") Integer serviceId,@Valid @RequestBody ServiceRequest serviceRequet){
 
         ResponseEntity<?> resp;
         serviceService.updateService(serviceId,serviceRequet);

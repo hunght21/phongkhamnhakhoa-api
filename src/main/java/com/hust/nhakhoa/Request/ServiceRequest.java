@@ -5,17 +5,17 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class RegisterRequest {
+public class ServiceRequest {
 
-    private String email;
-    private String password;
-    private Integer role;
-    private boolean gender;
-    private Integer phone;
-    private String userName;
-
+    private int id;
+    private String name;
+    private String detail;
+    private Double price;
+    private List<Integer> appointmentList;
 }

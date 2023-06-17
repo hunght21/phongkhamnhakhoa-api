@@ -1,6 +1,7 @@
 package com.hust.nhakhoa.Config;
 
 
+import com.hust.nhakhoa.Repository.PatientRepository;
 import com.hust.nhakhoa.Repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -15,6 +16,9 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 @Configuration
 @RequiredArgsConstructor
@@ -22,17 +26,29 @@ public class AppConfig {
 
     private final UserRepository userRepository;
 
+    private final PatientRepository patientRepository;
+
+//    @Bean
+//    public UserDetailsService userDetailsService() throws UsernameNotFoundException {
+//        return username -> userRepository.findByEmail(username)
+//                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+//    }
+
     @Bean
-    public UserDetailsService userDetailsService() throws UsernameNotFoundException {
-        return username -> userRepository.findByEmail(username)
+    public UserDetailsService patientDetailsService() throws UsernameNotFoundException {
+        return username -> patientRepository.findByEmail(username)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
     }
-
     @Bean
     public AuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
-        authenticationProvider.setUserDetailsService(userDetailsService());
-        authenticationProvider.setPasswordEncoder(passwordEncoder());
+
+//        if(true){
+            authenticationProvider.setUserDetailsService(patientDetailsService());
+            authenticationProvider.setPasswordEncoder(passwordEncoder());
+ //       }
+//        authenticationProvider.setUserDetailsService(userDetailsService());
+//        authenticationProvider.setPasswordEncoder(passwordEncoder());
 
         return authenticationProvider;
     }

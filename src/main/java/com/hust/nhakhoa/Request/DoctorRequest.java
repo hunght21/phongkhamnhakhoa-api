@@ -13,7 +13,11 @@ public class DoctorRequest {
 
     private int id;
     private String name;
-    private String phoneNumber;
-    private String Email;
-    private String gender;
+    private String password;
+    private String email;
+    private boolean gender;
+    private Integer phone;
+//    private String img;
+    private boolean status;
+    private Integer role;
 }

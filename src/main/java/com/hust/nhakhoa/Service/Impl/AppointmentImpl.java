@@ -101,13 +101,13 @@ public class AppointmentImpl implements AppointmentService {
                 .orElseThrow(() ->new ResourceNotFoundException("Doctor", "patient id", appointmentRequest.getPatientId()));
 //        if(employee.hasRole(Role.EMPLOYEE)) {
             appointment.setServices(services);
- //           appointment.setEmployee(employee);
+            appointment.setEmployee(employee);
             appointment.setDoctor(doctor);
             appointment.setPatient(patient);
             appointment.setStartTime(appointmentRequest.getStartTime());
             appointment.setEndTime(appointmentRequest.getEndTime());
             appointment.setNotes(appointmentRequest.getNotes());
-            appointment.setStatus(Status.valueOf(appointmentRequest.getStatus()));
+            appointment.setStatus(appointmentRequest.getStatus());
   //      }
 
     }

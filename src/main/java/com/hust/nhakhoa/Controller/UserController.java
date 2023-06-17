@@ -18,26 +18,26 @@ public class UserController implements SecuredController{
     @Autowired
     private UserService userService;
 
-    @PreAuthorize("hasAnyRole('ADMIN', 'RECEPTIONIST', 'EMPLOYEE')")
+ //   @PreAuthorize("hasAnyRole('ADMIN', 'RECEPTIONIST', 'EMPLOYEE')")
     @GetMapping("{id}")
     public ResponseEntity<UserDTO> getUserById(@PathVariable Integer id) {
         return new ResponseEntity<>(userService.getUserById(id), HttpStatus.OK);
     }
 
 
-    @PreAuthorize("hasAnyRole('ADMIN', 'RECEPTIONIST', 'EMPLOYEE')")
-    @PostMapping("/add")
-    public ResponseEntity<UserDTO> addUser(@RequestBody @Valid UserRequest userRequest) {
-        return new ResponseEntity<>(userService.addUser(userRequest), HttpStatus.CREATED);
-    }
+//    @PreAuthorize("hasAnyRole('ADMIN', 'RECEPTIONIST', 'EMPLOYEE')")
+//    @PostMapping("/add")
+//    public ResponseEntity<UserDTO> addUser(@RequestBody @Valid UserRequest userRequest) {
+//        return new ResponseEntity<>(userService.addUser(userRequest), HttpStatus.CREATED);
+//    }
 
-    @PreAuthorize("hasAnyRole('ADMIN', 'RECEPTIONIST', 'EMPLOYEE')")
+//    @PreAuthorize("hasAnyRole('ADMIN', 'RECEPTIONIST', 'EMPLOYEE')")
     @PutMapping("/update/{id}")
     public ResponseEntity<UserDTO> updateUser(@PathVariable Integer id, @RequestBody @Valid UserRequest userRequest) {
         return new ResponseEntity<>(userService.updateUser(id, userRequest), HttpStatus.OK);
     }
 
-    @PreAuthorize("hasAnyRole('ADMIN', 'RECEPTIONIST', 'EMPLOYEE')")
+//    @PreAuthorize("hasAnyRole('ADMIN', 'RECEPTIONIST', 'EMPLOYEE')")
     @DeleteMapping("delete{id}")
     public ResponseEntity<Void> deleteUser(@PathVariable Integer id) {
         userService.deleteUser(id);

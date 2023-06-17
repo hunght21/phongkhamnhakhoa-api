@@ -1,5 +1,6 @@
 package com.hust.nhakhoa.Request;
 
+import com.hust.nhakhoa.Model.Appointment;
 import com.hust.nhakhoa.Model.Prescription;
 import com.hust.nhakhoa.Model.Service;
 import lombok.AllArgsConstructor;
@@ -15,11 +16,12 @@ import java.util.List;
 @NoArgsConstructor
 public class PatientRequest {
 
-    private int id;
+    private Integer id;
     private String name;
-    private String phoneNumber;
-    private String dateOfBirth;
-    private String address;
-    private String Email;
-    private String gender;
+    private String mail;
+    private boolean gender;
+    private Integer phone;
+    //    private String img;
+//    private List<Integer> appointmentList;
+    private boolean status;
 }

@@ -73,23 +73,5 @@ public class JwtAthFilter extends OncePerRequestFilter{
             unauthenticatedRequestHandler.commence(request, response, new UsernameNotFoundException("Invalid token - user not found"));
         }
 
-//        jwtToken = authHeader.substring(7);
-//    //    userEmail = "something";
-//        userEmail = jwtService.extractUsername(jwtToken); //to do implemented
-//        if (userEmail != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-//            UserDetails userDetails = userDetailsService.loadUserByUsername(userEmail);
-//    //        final boolean isToken //to do implemented
-//            if (jwtService.isTokenValid(jwtToken, userDetails)) {
-//                UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
-//                        userDetails,
-//                        null,
-//                        userDetails.getAuthorities()
-//                );
-//                authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-//                SecurityContextHolder.getContext().setAuthentication(authToken);
-//            }
-//        }
-//        filterChain.doFilter(request, response);
-
     }
 }

@@ -60,15 +60,15 @@ public class AppointmentController {
     @PostMapping("/save")
     public ResponseEntity<AppointmentDTO> addAppointment(@RequestBody @Valid AppointmentRequest appointment) {
         ResponseEntity<AppointmentDTO> resp;
-        try {
-            if(appointment!=null) {
+//        try {
+//            if(appointment!=null) {
                 resp = new ResponseEntity<AppointmentDTO>(appointmentService.addAppointment(appointment), HttpStatus.CREATED);
-            }else {
-                resp = new ResponseEntity<>(HttpStatus.NO_CONTENT);
-            }
-        }catch(Exception e) {
-            resp = new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+//            }else {
+//                resp = new ResponseEntity<>(HttpStatus.NO_CONTENT);
+//            }
+//        }catch(Exception e) {
+//            resp = new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+//        }
         return resp;
 
     }

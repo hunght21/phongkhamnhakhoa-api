@@ -1,6 +1,5 @@
 package com.hust.nhakhoa.Service.Impl;
 
-import com.hust.nhakhoa.DTO.AppointmentDTO;
 import com.hust.nhakhoa.DTO.PrescriptionDTO;
 import com.hust.nhakhoa.Exceptions.ResourceNotFoundException;
 import com.hust.nhakhoa.Model.*;
@@ -9,7 +8,6 @@ import com.hust.nhakhoa.Repository.MedicineRepository;
 import com.hust.nhakhoa.Repository.PatientRepository;
 import com.hust.nhakhoa.Repository.PrescriptionRepository;
 import com.hust.nhakhoa.Request.PrescriptionRequest;
-import com.hust.nhakhoa.Request.ServiceRequet;
 import com.hust.nhakhoa.Service.MedicineService;
 import com.hust.nhakhoa.Service.PrescriptionService;
 import org.modelmapper.ModelMapper;
@@ -130,8 +128,6 @@ public class PrescriptionServiceImpl implements PrescriptionService {
 
         Doctor doctor = doctorRepository.findById(prescriptionRequest.getDoctorId())
                 .orElseThrow(() ->new ResourceNotFoundException("Doctor", "patient id", prescriptionRequest.getPatientId()));
-        prescription.setPatient(patient);
-        prescription.setDoctor(doctor);
         prescription.setName(prescriptionRequest.getName());
         prescription.setNote(prescriptionRequest.getNote());
         prescription.setMedicineList(medicineList);

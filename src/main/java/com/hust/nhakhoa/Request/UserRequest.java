@@ -1,21 +1,25 @@
 package com.hust.nhakhoa.Request;
 
 import com.hust.nhakhoa.Model.Role;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import jakarta.persistence.Column;
+import lombok.*;
 
-import java.util.List;
 
-@Data
+@Getter
+@Setter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserRequest {
 
+    private Integer id;
     private String userName;
     private String email;
     private String passWord;
-    private List<String> roleList;
+    private Integer role;
+    private boolean gender;
+    private Integer phone;
+//    private String img;
+
+
 }

@@ -6,7 +6,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.sql.Time;
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 @Data
@@ -15,23 +17,19 @@ import java.util.List;
 @NoArgsConstructor
 public class AppointmentRequest {
 
-//    @NotNull(message = "Employee's id cannot be null")
+
     private Integer employeeId;
 
- //   @NotNull(message = "Patient's id cannot be null")
     private Integer patientId;
 
     private Integer doctorId;
 
- //   @NotNull(message = "Start time cannot be null")
-    private LocalDateTime startTime;
+    private Date startTime;
 
- //   @NotNull(message = "End time cannot be null")
-    private LocalDateTime endTime;
+    private Time endTime;
 
     private String notes;
 
-  //  @NotNull(message = "Status cannot be null")
     private String status;
 
     private List<Integer> serviceIds;

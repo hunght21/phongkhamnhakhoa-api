@@ -22,6 +22,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@Inheritance(strategy = InheritanceType.JOINED)
 
 public class Users implements UserDetails {
 
@@ -38,34 +39,45 @@ public class Users implements UserDetails {
     @Column(name = "email")
     private String email;
 
-    @OneToMany(mappedBy = "employee")
-    private List<Appointment> appointmentList;
+//    @OneToOne(mappedBy = "user")
+//    private Patient patient;
+
+//    @OneToMany(mappedBy = "employee")
+//    private List<Appointment> appointmentList;
+
+    @ManyToOne
+    @JoinColumn(name = "role")
+    private Role role;
+
+    @Column(name = "status", nullable = false)
+    private boolean status;
+
+//    @Enumerated(EnumType.STRING)
+//    @Column(name = "role", nullable = false)
+//    private List<Role> roleList = new ArrayList<>();
 
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "role", nullable = false)
-    private List<Role> roleList = new ArrayList<>();
-
-
-    public Boolean hasRole(Role role) {
-        return roleList.contains(role);
+    public Integer hasRole(Role role) {
+        return role.getRole_id();
     }
 
+    @Column(name = "gender")
+    private boolean gender;
 
-    public Users(String name, String password, String email, List<Role> roleList) {
-        this.name = name;
-        this.password = password;
-        this.email = email;
-        this.roleList = roleList;
-    }
+    @Column(name = "phone")
+    private Integer phone;
+
+    @Column(name = "img")
+    private String img;
+
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
 
         ArrayList<SimpleGrantedAuthority> authorities = new ArrayList<>();
-        for (Role role : roleList) {
-            authorities.add(new SimpleGrantedAuthority("ROLE_" + role.name()));
-        }
+        Role role = new Role();
+        authorities.add(new SimpleGrantedAuthority("ROLE_" + role.getName()));
         return authorities;
     }
 

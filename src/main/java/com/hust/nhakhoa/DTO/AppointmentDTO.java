@@ -9,7 +9,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.sql.Time;
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 @Data
@@ -21,10 +23,10 @@ public class AppointmentDTO implements Serializable {
     private UserDTO user;
     private Patient patient;
     private Doctor doctor;
-    private LocalDateTime startTime;
-    private LocalDateTime endTime;
+    private Date startTime;
+    private Time endTime;
     private String notes;
-    private Status status;
+    private String status;
     private List<Service> servicesId;
 
 }

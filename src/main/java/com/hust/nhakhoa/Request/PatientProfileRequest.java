@@ -1,23 +1,20 @@
 package com.hust.nhakhoa.Request;
 
-import com.hust.nhakhoa.Model.Appointment;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ServiceRequet {
-
+public class PatientProfileRequest {
     private int id;
     private String name;
-    private Integer time;
-    private String detail;
-    private Double price;
-    private List<Integer> appointmentList;
+    private String phoneNumber;
+    private String dateOfBirth;
+    private String address;
+    private String gender;
+    private Integer userID;
 }

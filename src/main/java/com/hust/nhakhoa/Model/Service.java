@@ -23,8 +23,11 @@ public class Service {
     @Column(name = "service_name")
     private String name;
 
-    @Column(name = "service_time")
-    private Integer time;
+//    @Column(name = "service_time")
+//    private Integer time;
+
+    @Column(name = "img")
+    private String img;
 
     @Column(name = "service_detail")
     private String detail;
@@ -37,9 +40,4 @@ public class Service {
     @ManyToMany(mappedBy = "services", fetch = FetchType.EAGER)
     private List<Appointment> appointmentList;
 
-    public Service(String name, Integer time, Double price) {
-        this.name = name;
-        this.time = time;
-        this.price = price;
-    }
 }

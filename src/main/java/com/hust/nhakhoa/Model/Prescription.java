@@ -46,14 +46,14 @@ public class Prescription {
         this.note = note;
     }
 
-    @ManyToOne
-    @JoinColumn(name = "doctor_id")
-    private Doctor doctor;
-
-    @ManyToOne
- //   @JsonBackReference
-    @JoinColumn(name = "patient_id")
-    private Patient patient;
+//    @ManyToOne
+//    @JoinColumn(name = "doctor_id")
+//    private Doctor doctor;
+//
+//    @ManyToOne
+// //   @JsonBackReference
+//    @JoinColumn(name = "patient_id")
+//    private Patient patient;
 
     @ManyToMany
     @JoinTable(
